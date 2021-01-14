@@ -6,6 +6,7 @@ import { User } from '../entities/user';
 import { environment} from '../../../environments/environment';
 import {tap} from 'rxjs/operators';
 import {SessionService} from './session.service';
+import { ProfileUpdateInterface } from '../interfaces/profileUpdate.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -44,7 +45,7 @@ export class AuthService {
 
   me(): Observable<any> {
     return this.httpClient.get(
-      `${environment.api}/api/ping`
+      `${environment.api}/api/ping`,
     ).pipe(
       tap((user: User) => {
         console.log({user});
@@ -52,7 +53,5 @@ export class AuthService {
       }),
     );
   }
-
-
 
 }

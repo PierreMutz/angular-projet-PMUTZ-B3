@@ -1,18 +1,17 @@
-import { Component, OnInit } from '@angular/core';
-import {FormBuilder, Validators} from '@angular/forms';
-import {ProfileService} from '../../../core/services/profile.service';
-import {AuthService} from '../../../core/services/auth.service';
-import {Observable} from 'rxjs';
-import {TagInterface} from '../../../core/interfaces/tag.interface';
-import {TagService} from '../../../core/services/tag.service';
+import { Component, OnInit } from "@angular/core";
+import { FormBuilder, Validators } from "@angular/forms";
+import { ProfileService } from "../../../core/services/profile.service";
+import { AuthService } from "../../../core/services/auth.service";
+import { Observable } from "rxjs";
+import { TagInterface } from "../../../core/interfaces/tag.interface";
+import { TagService } from "../../../core/services/tag.service";
 
 @Component({
-  selector: 'app-profile',
-  templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.scss']
+  selector: "app-profile",
+  templateUrl: "./profile.component.html",
+  styleUrls: ["./profile.component.scss"]
 })
 export class ProfileComponent implements OnInit {
-
   tags$: Observable<TagInterface[]>;
 
   constructor(
@@ -37,15 +36,15 @@ export class ProfileComponent implements OnInit {
   }
 
   get firstNameControl() {
-    return this.userForm.get('first_name');
+    return this.userForm.get("first_name");
   }
 
   get lastNameControl() {
-    return this.userForm.get('last_name');
+    return this.userForm.get("last_name");
   }
 
   get tagsControl() {
-    return this.userForm.get('tags');
+    return this.userForm.get("tags");
   }
 
   updateProfile(): void {
@@ -53,4 +52,9 @@ export class ProfileComponent implements OnInit {
     this.profileService.updateChanges(userChanges).subscribe();
   }
 
+  compareIds(tagOption: TagInterface, tagSelection): boolean {
+    if (tagOption && tagSelection) {
+      return tagOption.id === tagSelection.id;
+    }
+  }
 }
